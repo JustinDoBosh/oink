@@ -1,263 +1,98 @@
 'use strict'
-const User = require('../models/user');
+const Little = require('../models/little');
 const Promise = require('bluebird');
 
 var mongoose = require('mongoose');
 
 var db = mongoose.connection;
 
-
 db.on("error", function(err){
     console.error("Connection Error",err);
   });
 
-//POST api/user
+//POST api/little
 module.exports.add = (req, res, next) => {
     let data = req.body || {}
     // Create a user object with information in body
-    let user = new User({
+    let little = new Little({
 
-      firstName: data.firstName,
-
-      lastName: data.lastName,
-
+      name: data.name,
+  
       email: data.email,
 
-      password : data.password,
-
-      phone: {
-
-        number: data.phone.number,
-
-        serviceProvider: data.phone.serviceProvider,
-
-        smartPhone: data.phone.smartPhone
-
-      },
-
-      children: data.children,
-
-      dob: data.dob,
-
       gender: data.gender,
-
-      race: data.race,
-
+      
       ethnicity: data.ethnicity,
 
-      address: {
+      age: data.age,
+      
+      zip_code: data.zip_code,
 
-        street: data.address.street,
+      incarcerated_parent: data.incarcerated_parent,
+      
+      parent_relationship_to_child: data.parent_relationship_to_child,
 
-        number: data.address.number,
+      school_grade: data.school_grade,
+      
+      family_income: data.family_income,
 
-        zip: data.address.zip,
+      military_parent: data.military_parent,
+      
+      military_parent_deployed: data.military_parent_deployed,
 
-        city: data.address.city
-      },
+      family_assistance: data.family_assistance,
+      
+      free_lunch: data.free_lunch,
 
-      married: data.married,
+      refer_source: data.refer_source
 
-      language: data.language,
+    })
 
-      educationLevel: data.educationLevel,
-
-      householdOccupants: data.householdOccupants,
-
-      householdIncome: data.householdIncome,
-
-      employment: {
-
-        status: data.employment.status,
-
-        employer: data.employment.employer
-
-      },
-
-      lastPaidDate: data.lastPaidDate,
-
-      isActive: data.isActive
-
-    });
-
-    user.save(function (err) {
+    little.save(function (err) {
         if (err) {
             handleError(res, err);
         }
         else {
-            res.json(user);
+            res.json(little);
         }
     });
 
 }
 
-//PUT api/user/:id
-module.exports.update = (req, res, next) => {
-  let userId = req.params.id
-  let data = req.body || {}
-
-  let query = User.findById(userId)
-
-  let user;
-
-  query.exec()
-    .then(user => {
-      //Check to see if id matches a user in the db
-      if(!user){
-        console.log("User not found!");
-      }
-
-      if(data.hasOwnProperty('children')){
-        (data.children).map((child) => {
-          (user.children).push(child);
-        });
-      }
-
-      if(data.hasOwnProperty('firstName')){
-        quiz.firstName = data.firstName
-      }
-
-      if(data.hasOwnProperty('lastName')){
-        quiz.lastName = data.lastName
-      }
-
-      if(data.hasOwnProperty('email')){
-        quiz.email = data.email
-      }
-
-      if(data.hasOwnProperty('password')){
-        quiz.password = data.password
-      }
-
-      if(data.hasOwnProperty('phone.number')){
-        quiz.phone.number = data.phone.number
-      }
-
-      if(data.hasOwnProperty('phone.serviceProvider')){
-        quiz.phone.serviceProvider = data.phone.serviceProvider
-      }
-
-      if(data.hasOwnProperty('phone.smartPhone')){
-        quiz.phone.smartPhone = data.phone.smartPhone
-      }
-
-      if(data.hasOwnProperty('phone.smartPhone')){
-        quiz.phone.smartPhone = data.phone.smartPhone
-      }
-
-      if(data.hasOwnProperty('race')){
-        quiz.race = data.race
-      }
-
-      if(data.hasOwnProperty('ethnicity')){
-        quiz.ethnicity= data.ethnicity
-      }
-
-      if(data.hasOwnProperty('address.street')){
-        quiz.address.street = data.address.street
-      }
-
-      if(data.hasOwnProperty('address.number')){
-        quiz.address.number = data.address.number
-      }
-
-      if(data.hasOwnProperty('address.zip')){
-        quiz.address.zip = data.address.zip
-      }
-
-      if(data.hasOwnProperty('address.city')){
-        quiz.address.city = data.address.city
-      }
-
-      if(data.hasOwnProperty('married')){
-        quiz.married = data.married
-      }
-
-      if(data.hasOwnProperty('language')){
-        quiz.language= data.language
-      }
-
-      if(data.hasOwnProperty('educationLevel')){
-        quiz.educationLevel= data.educationLevel
-      }
-
-      if(data.hasOwnProperty('householdOccupants')){
-        quiz.householdOccupants= data.householdOccupants
-      }
-
-      if(data.hasOwnProperty('employment.status')){
-        quiz.employment.status = data.employment.status
-      }
-
-      if(data.hasOwnProperty('employment.employer')){
-        quiz.employment.employer = data.employment.employer
-      }
-
-      if(data.hasOwnProperty('lastPaidDate')){
-        quiz.lastPaidDate= data.lastPaidDate
-      }
-
-      if(data.hasOwnProperty('isActive')){
-        quiz.isActive= data.isActive
-      }
-
-      return user
-    })
-    .then(user => user.save())
-    .then(user => res.json(user))
-    .catch(err => next(err))
-}
-
-//DELETE api/user/:id
-module.exports.delete = (req, res, next) => {
-  let userId = req.params.id;
-  var query = User.remove({ _id: userId });
-  let user;
-  return query.exec()
-    .then(user => {
-      if(!user) {
-        throw ("User not found!")
-      }
-      return user
-    })
-    .then(result => res.json(result))
-    .catch(err => next(err))
-}
-
 //FIND by id api/user/:id
-module.exports.findById = (req, res, next) => {
-  let userId = req.params.id;
+// module.exports.findById = (req, res, next) => {
+//   let userId = req.params.id;
 
-  let query = User.findById(userId)
+//   let query = User.findById(userId)
+//     .lean()
+
+//   let user;
+
+//   return query.exec()
+//     .then(user => {
+//       if(!user) {
+//         throw ("User not found!")
+//       }
+//       return user
+//     })
+//     .then(result => res.json(result))
+//     .catch(err => next(err))
+// }
+
+//FIND all api/littles/find
+module.exports.find = (req, res, next) => {
+  console.log('*******************LITTLES FIND WORKS!!!!!!!!!!!: ', req)
+  let query = Little.find({req})
     .lean()
 
-  let user;
+  let little;
 
   return query.exec()
-    .then(user => {
-      if(!user) {
-        throw ("User not found!")
+    .then(little => {
+      if(!little) {
+        throw ("No littles found!")
       }
-      return user
-    })
-    .then(result => res.json(result))
-    .catch(err => next(err))
-}
-
-//FIND all api/user/all
-module.exports.findAll = (req, res, next) => {
-  console.log("&&&&FIND ALL CTRL&&&&&&&&");
-  let query = User.find({})
-    .lean()
-
-  let user;
-
-  return query.exec()
-    .then(user => {
-      if(!user) {
-        throw ("User not found!")
-      }
-      return user
+      return little
     })
     .then(result => res.json(result))
     .catch(err => next(err))

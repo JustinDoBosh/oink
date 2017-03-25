@@ -14,6 +14,7 @@ function dashboard(state = initialIndexState, action) {
             }
         
         case types.SEARCH_REQUEST_FAILURE:
+            console.log('search reducer error: ', action.payload)
             return {
                 ...state
             }

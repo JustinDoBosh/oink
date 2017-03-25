@@ -114,13 +114,20 @@ input, select {
     
 }
 
-.form-control
-{
-    
+.navbar {
+    margin-bottom: 2px;
 }
 
+#submitBtn {
+    background-color: #337ab7;
+    color: #fff
+}
 
-
+#filterBtn > span {
+    font-size: 20px;
+    margin: 5px 5px 5px 0;
+    cursor: pointer;
+}
 
 
 

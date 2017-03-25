@@ -20,12 +20,10 @@ class Dashboard extends React.Component {
             <Navbar>
     <Navbar.Header>
       <Navbar.Brand>
-        <a href="#">React-Bootstrap</a>
+        <a href="#">BBBS Dashboard</a>
       </Navbar.Brand>
     </Navbar.Header>
-    <Nav>
-      <NavItem eventKey={1} href="#">Link</NavItem>
-      <NavItem eventKey={2} href="#">Link</NavItem>
+    <Nav pullRight>
       <NavDropdown eventKey={3} title="My Account" id="basic-nav-dropdown">
         <MenuItem eventKey={3.1}>Settings</MenuItem>
         

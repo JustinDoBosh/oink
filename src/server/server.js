@@ -52,6 +52,8 @@ app.use((req, res, next) => {
   next()
 })
 
+app.use('/api', require('./routes/littles'))
+
 const staticPath = path.join(__dirname, '/public')
 
 app.use(express.static(staticPath))
