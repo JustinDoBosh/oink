@@ -33,11 +33,6 @@ class Search extends React.Component {
 
     render() {
 
-        const style = {
-            label: {
-                color: 'red'
-            }
-        }
         return (
             <Form horizontal>
                 <FormGroup>
@@ -49,14 +44,14 @@ class Search extends React.Component {
 
                 <FormGroup>
                 <Col sm={6} smPush={3}>
-                    <HelpBlock style={style.lable}>Search by age</HelpBlock>
+                    <HelpBlock>Search by age</HelpBlock>
                     <FormControl type="number" value={this.state.age} onChange={this.handleAgeSearch}/>
                 </Col>
                 </FormGroup>
 
                 <FormGroup>
                 <Col sm={6} smPush={3}>
-                    <HelpBlock style={style.lable}>Search by zipCode</HelpBlock>
+                    <HelpBlock>Search by zipCode</HelpBlock>
                     <FormControl type="text" value={this.state.zipCode} onChange={this.handleZipCodeSearch}/>
                 </Col>
                 </FormGroup>
