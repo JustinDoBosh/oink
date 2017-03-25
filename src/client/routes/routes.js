@@ -1,12 +1,12 @@
 import React from 'react'
 import { IndexRoute, Route, IndexRedirect, Router, Redirect, browserHistory } from 'react-router'
 import App from '../containers/app'
-import Home from '../containers/index'
+import Dashboard from '../containers/dashboard'
 
 const routes = (
   <Router history={ browserHistory}>
     <Route path="/" component={App}>
-    <IndexRoute component={Home}/>
+    <IndexRoute component={Dashboard}/>
     </Route>
   </Router>
 )

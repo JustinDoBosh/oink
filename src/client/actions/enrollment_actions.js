@@ -1,4 +1,4 @@
-import * as types from '../constants/constants'
+import * as types from '../constants/enrollment_constants'
 
 export function setPhrase(phrase) {
   return {

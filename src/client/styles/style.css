@@ -100,3 +100,15 @@ hr {
 input, select {
     vertical-align:middle;
 }
+
+.input-group > .form-control {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+.help-block {
+    font-size: 13px;
+}
