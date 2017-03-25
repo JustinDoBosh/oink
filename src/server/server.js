@@ -18,10 +18,10 @@ import path from 'path'
 
 const port = process.env.PORT || 8080
 
-//mongoose.Promise = Promise
+mongoose.Promise = Promise
 
 //initalize mongodb connection
-//mongoose.connect(config.mongoURL);
+mongoose.connect(config.mongoURL);
 
 let app = express()
 let server = http.createServer(app)
@@ -53,6 +53,7 @@ app.use((req, res, next) => {
 })
 
 app.use('/api', require('./routes/littles'))
+app.use('/api', require('./routes/bigs'))
 
 const staticPath = path.join(__dirname, '/public')
 

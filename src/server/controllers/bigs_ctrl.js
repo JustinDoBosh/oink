@@ -1,5 +1,5 @@
 'use strict'
-const Little = require('../models/little');
+const Big = require('../models/big');
 const Promise = require('bluebird');
 
 var mongoose = require('mongoose');
@@ -10,49 +10,47 @@ db.on("error", function(err){
     console.error("Connection Error",err);
   });
 
-//POST api/little
+//POST api/big/add
 module.exports.add = (req, res, next) => {
+    console.log('********ADDING BIGS******')
     let reqData = req.body || []
 
     console.log('data!!!! ', reqData)
 
     reqData.forEach(data => {
-      let little = new Little({
+      let big = new Big({
 
-        name: data.name,
-    
-        email: data.email,
+        Name: data.Name,
 
-        ChildGender: data.ChildGender,
+        Email: data.Email,
+
+        Hybrid: data.Hybrid,
+  
+        MatchType: data.MatchType,
+
+        VolGender: data.VolGender,
+
+        VolZip: data.VolZip,
         
-        ChildEthnicity: data.ChildEthnicity,
+        VolEthnicity: data.VolEthnicity,
 
-        ChildAge: data.ChildAge,
+        VolAge: data.VolAge,
         
-        zip_code: data.zip_code,
+        VolEducationLevel: data.VolEducationLevel,
 
-        IncarceratedParent: data.IncarceratedParent,
+        VolMaritalStatus: data.VolMaritalStatus,
         
-        AdultChildRelationship: data.AdultChildRelationship,
+        VolEmploymentLengthYears: data.VolEmploymentLengthYears,
 
-        ChildGrade: data.ChildGrade,
-        
-        ChildIncomeLevel: data.ChildIncomeLevel,
-
-        ChildFamilyAssistance: data.ChildFamilyAssistance,
-        
-        ChildFreeReducedlunch: data.ChildFreeReducedlunch,
-
-        ChildAutomaticProgramName: data.ChildAutomaticProgramName
-
+        VolReferralSource: data.VolReferralSource
       })
 
-      little.save(function (err) {
+      big.save(function (err) {
           if (err) {
               console.log('ERROR: ', err)
           }
           else {
-              res.json(little);
+              res.json(big);
           }
       })
     })
@@ -81,7 +79,7 @@ module.exports.add = (req, res, next) => {
 //     .catch(err => next(err))
 // }
 
-//FIND all api/littles/find
+//FIND all api/big/find
 module.exports.find = (req, res, next) => {
   let searchCriteria = {}
   if (req.query.name) {
@@ -96,17 +94,17 @@ module.exports.find = (req, res, next) => {
     searchCriteria.zip_code = req.query.zip_code
   }
 
-  let query = Little.find(searchCriteria)
+  let query = Big.find(searchCriteria)
     .lean()
 
-  let little;
+  let big;
 
   return query.exec()
-    .then(little => {
-      if(!little) {
-        throw ("No littles found!")
+    .then(big => {
+      if(!big) {
+        throw ("No bigs found!")
       }
-      return little
+      return big
     })
     .then(result => res.json(result))
     .catch(err => next(err))

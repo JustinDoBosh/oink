@@ -12,31 +12,28 @@ const LittleSchema = new Schema({
   
   email: {type: String, required: true},
 
-  gender: {type: String, required: true },
+  ChildGender: {type: String, required: true },
   
-  ethnicity: {type: String, required: true},
+  ChildEthnicity: {type: String, required: true},
 
-  age: {type: String, required: true },
+  ChildAge: {type: Number, required: true },
   
   zip_code: {type: String, required: true},
 
-  incarcerated_parent: {type: Boolean, required: true },
+  IncarceratedParent: {type: Boolean, required: true },
   
-  parent_relationship_to_child: {type: String, required: true},
+  AdultChildRelationship: {type: String, required: true},
 
-  school_grade: {type: String, required: true },
+  ChildGrade: {type: String, required: true },
   
-  family_income: {type: String, required: true},
+  ChildIncomeLevel: {type: String, required: true},
 
-  military_parent: {type: Boolean, required: true },
+  ChildFamilyAssistance: {type: Boolean, required: true },
   
-  military_parent_deployed: {type: Boolean, required: true},
+  ChildFreeReducedlunch: {type: Boolean, required: true},
 
-  family_assistance: {type: Boolean, required: true },
-  
-  free_lunch: {type: Boolean, required: true},
+  ChildAutomaticProgramName: {type: String, required: true},
 
-  refer_source: {type: String, required: true }
 
 },{
 
