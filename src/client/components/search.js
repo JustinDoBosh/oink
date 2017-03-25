@@ -4,7 +4,7 @@ import { Form, Glyphicon, FormGroup, Col, FormControl, Checkbox, Button, Control
 class Search extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {name: '', age: 0, zipCode: null, filterShown: false}
+        this.state = {name: '', age: null, zipCode: null, filterShown: false}
     }
 
     static propTypes = {
@@ -12,15 +12,18 @@ class Search extends React.Component {
     }
 
     handleNameSearch = (e) => {
-        this.setState({name: event.target.value});
+        console.log('event.target.value: ', e.target.value)
+        this.setState({name: e.target.value});
     }
 
     handleAgeSearch = (e) => {
-        this.setState({age: event.target.value});
+        console.log('event.target.value: ', e.target.value)
+        this.setState({age: e.target.value});
     }
 
     handleZipCodeSearch = (e) => {
-        this.setState({zipCode: event.target.value});
+        console.log('event.target.value: ', e.target.value)
+        this.setState({zipCode: e.target.value});
     }
 
     handleSearch = () => {
@@ -62,7 +65,7 @@ class Search extends React.Component {
 
                     <FormGroup>
                     <Col smOffset={8} sm={3}>
-                        <Button type="submit" id="submitBtn">
+                        <Button type="submit" onClick={this.handleSearch} id="submitBtn">
                         Search
                         </Button>
                     </Col>

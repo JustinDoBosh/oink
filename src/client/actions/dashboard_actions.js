@@ -1,27 +1,29 @@
 import axios from 'axios'
+import fetch from 'isomorphic-fetch'
 import * as types from '../constants/dashboard_constants'
 
-export function search(searchQuery) {
-    console.log('searchQuery: ', searchQuery)
-    axios.get('api/littles/findAll', {
-        params: {
-            name: searchQuery.name,
-            age: searchQuery.age,
-            zipCode: searchQuery.zipCode
-        }
+export function getLittles(searchQuery) {
+    return fetch(`http://localhost:8080/api/littles/find?name=${searchQuery.name}`, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        cache: 'no-cache'
     })
-    .then(function (response) {
-        console.log('search response: ', response)
-        return {
-            type: SEARCH_REQUEST_SUCCESS,
-            payload: response
-        }
-    })
-    .catch(function (error) {
-        return {
-            type: SEARCH_REQUEST_FAILURE,
-            payload: error
-        }
-    })
-}
+    .then(response =>response.json().then(json => ({json, response})))
+    .then(({json, response}) => {
 
+        if(!response.ok){
+        return Promise.reject(json);
+        }
+        console.log('json: ', json[0])
+        return {
+            type: 'LITTLES_SEARCH',
+            payload: json[0]
+        }
+    })
+
+}

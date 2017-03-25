@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import _ from 'lodash'
 
-import * as dashboardActions from '../actions/enrollment_actions'
+import * as dashboardActions from '../actions/dashboard_actions'
 import Search from '../components/search'
 import { Form, FormGroup, Col, FormControl, Checkbox, Button, Nav, Navbar, Grid, Row, Thumbnail,Header, NavItem, NavDropdown, MenuItem, MenuItemControlLabel, HelpBlock} from 'react-bootstrap';
 
@@ -12,8 +12,13 @@ class Dashboard extends React.Component {
 
   }
 
+  handleLittlesRequest = (query) => {
+    console.log('query: ', query)
+    this.props.getLittles(query)
+  }
+
   render(){
-    const {phrase,search} = this.props
+    const {phrase,} = this.props
 
     return (
         <div>
@@ -33,7 +38,7 @@ class Dashboard extends React.Component {
                     </NavDropdown>
                   </Nav>
                 </Navbar>
-            <Search applySearch={search}/>
+            <Search applySearch={this.handleLittlesRequest}/>
               <div class="user_profile"> 
               <Grid>
               <Row>
@@ -79,10 +84,10 @@ class Dashboard extends React.Component {
 
 function mapStateToProps(state){
   return {
-    
+    littles: state.dashboard.littles
   }
 }
 
 export default connect(mapStateToProps, {
-  search: dashboardActions.search
+  getLittles: dashboardActions.getLittles
 })(Dashboard)

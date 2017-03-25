@@ -1,26 +1,28 @@
 import * as types from '../constants/dashboard_constants'
 
-const initialIndexState = {
-    littles: []
+const initialDashboardState = {
+    littles: {}
 }
 
-function dashboard(state = initialIndexState, action) {
+function dashboard(state = initialDashboardState, action) {
     switch(action.type) {
 
-        case types.SEARCH_REQUEST_SUCCESS:
-            return {
-                ...state,
-                littles: action.payload.results
+        case types.LITTLES_SEARCH:{
+            const results = action.payload
+            let user = {
+                name: '',
+                email: ''
             }
-        
-        case types.SEARCH_REQUEST_FAILURE:
-            console.log('search reducer error: ', action.payload)
-            return {
-                ...state
-            }
+            Object.keys(results).forEach(function(key) {
+                user[key] = results[key]
+                console.log(key, results[key]);
+            });
+            
+            //console.log('user: ', JSON.parse(user))
+            return Object.assign({}, state, {littles: {name: results.name}})}
 
         default:
-            return state
+            return {...state}
     }
 }
 
