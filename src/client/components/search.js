@@ -59,7 +59,7 @@ class Search extends React.Component {
                 <FormGroup>
                 <Col smOffset={1} sm={10}>
                     <Button type="submit">
-                    Sign in
+                    Search
                     </Button>
                 </Col>
                 </FormGroup>
