@@ -82,16 +82,16 @@ module.exports.add = (req, res, next) => {
 //FIND all api/big/find
 module.exports.find = (req, res, next) => {
   let searchCriteria = {}
-  if (req.query.name) {
-    searchCriteria.name = req.query.name
+  if (req.query.Name) {
+    searchCriteria.Name = req.query.Name
   } 
 
   if (req.query.age) {
-    searchCriteria.age = req.query.age
+    searchCriteria.VolAge = req.query.VolAge
   }
 
-  if (req.query.zip_code) {
-    searchCriteria.zip_code = req.query.zip_code
+  if (req.query.VolZip) {
+    searchCriteria.VolZip = req.query.VolZip
   }
 
   let query = Big.find(searchCriteria)
